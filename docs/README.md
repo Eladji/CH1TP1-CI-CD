@@ -1,6 +1,8 @@
-# Captures d'écran du rendu
+# Preuves locales
 
-Placez ici les deux captures demandées par le TP :
+- `evidence/red.txt` : test en échec après mutation du statut de création.
+- `evidence/green.txt` : chaîne lint, formatage et couverture après correction.
+- `evidence/smoke-http.txt` : requêtes sur un vrai serveur HTTP local.
+- `evidence/python313.txt` : vérification de la seconde version de la matrice.
 
-- `pipeline-rouge.png` — le run GitHub Actions en échec après le bug intentionnel
-- `pipeline-vert.png` — le run GitHub Actions au vert après le correctif
+Ce sont des journaux d'exécution locale, sans exécution GitHub Actions.

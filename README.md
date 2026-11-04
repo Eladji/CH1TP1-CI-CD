@@ -1,7 +1,5 @@
 # Annuaire des étudiants — API REST + CI/CD
 
-[![CI](https://github.com/Eladji/ch1tp/actions/workflows/ci.yml/badge.svg)](https://github.com/Eladji/ch1tp/actions/workflows/ci.yml)
-
 API REST de gestion d'un annuaire d'étudiants (TP chapitre 1 — CI/CD & DevOps).
 Les données sont stockées **en mémoire** : elles sont réinitialisées à chaque redémarrage.
 
@@ -36,9 +34,9 @@ uv sync --dev
 ## Structure
 
 ```
-ch1tp/
+tp-chapitre-1/
 ├── .github/workflows/ci.yml   # Pipeline d'intégration continue
-├── src/ch1tp/
+├── src/tp-chapitre-1/
 │   ├── data.py                # Données en mémoire + reset_data()
 │   ├── validation.py          # Règles de validation métier
 │   ├── routes.py              # Les 7 endpoints
@@ -179,7 +177,7 @@ curl "http://127.0.0.1:8000/students/search"           # 400, paramètre q manqu
 
 ## Tests
 
-32 tests, couverture affichée à chaque exécution :
+68 tests, couverture affichée à chaque exécution :
 
 ```bash
 uv run pytest
@@ -200,20 +198,29 @@ Checkout → Setup uv + Python (matrix 3.12 / 3.13) → Install → Lint (ruff) 
 Le job tourne en parallèle sur les deux versions de Python ; le rapport de couverture
 est publié en artefact. Une seule erreur de lint ou un seul test rouge fait échouer le pipeline.
 
-## Cycle Red → Green
+## Vérification locale et cycle Red → Green
 
-Démonstration que le pipeline détecte réellement les régressions :
+Ce dépôt est autonome, sur la branche `main`, sans remote. Aucun push ni run
+GitHub Actions n'a été effectué. Le workflow est fourni pour répondre à la partie
+configuration du sujet ; ses deux versions Python sont vérifiées localement.
 
-1. Pipeline vert.
-2. Bug volontaire (`test: introduire un bug intentionnel pour démontrer le CI`) → pipeline rouge.
-3. Correction (`fix: corriger le bug intentionnel`) → pipeline vert.
+```bash
+./scripts/ci.sh
+```
 
-Captures d'écran dans [`docs/`](docs/).
+Cette commande installe les dépendances verrouillées, vérifie lint et formatage,
+puis lance les tests avec un seuil de couverture de 80 % et produit
+`coverage.xml` et `coverage/html/index.html` (non versionnés).
+Le point d'entrée du serveur est exclu de la mesure ; les routes, validations,
+données et configuration de l'application sont incluses, avec leurs branches.
+
+La démonstration locale et les sorties réelles sont décrites dans
+[`docs/demo-red-green.md`](docs/demo-red-green.md). Le rendu local fournit les
+journaux rouge et vert à la place des captures GitHub demandées par le sujet.
 
 ## Bonus implémentés
 
 - Tri (`?sort=grade&order=desc`) et pagination (`?page=2&limit=2`) avec en-tête `X-Total-Count`
-- Badge CI dans le README
 - Couverture de code (pytest-cov) affichée dans le pipeline et publiée en artefact
-- 32 tests (> 20), incluant des cas limites (casse, email réutilisé, id non numérique, tri invalide)
+- 68 tests (> 20), incluant des cas limites (casse, email réutilisé, id non numérique, tri invalide)
 - Documentation API complète ci-dessus + Swagger UI sur `/docs`
