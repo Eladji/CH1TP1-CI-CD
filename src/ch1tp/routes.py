@@ -113,7 +113,7 @@ def get_student(student_id: str) -> dict:
     return _get_or_404(student_id)
 
 
-@router.post("", status_code=status.HTTP_200_OK)
+@router.post("", status_code=status.HTTP_201_CREATED)
 def create_student(payload: Annotated[Any, Body()]) -> dict:
     cleaned = _validate_or_400(payload)
     if data.email_taken(cleaned["email"]):
