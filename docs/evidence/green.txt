@@ -1,0 +1,30 @@
+$ ./scripts/ci.sh
+Resolved 26 packages in 1ms
+Checked 25 packages in 0.41ms
+All checks passed!
+15 files already formatted
+....................................................................     [100%]
+=============================== warnings summary ===============================
+.venv/lib/python3.12/site-packages/fastapi/testclient.py:1
+  /home/reddji/cour/b3/TDD&integration/tp-chapitre-1/.venv/lib/python3.12/site-packages/fastapi/testclient.py:1: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.
+    from starlette.testclient import TestClient as TestClient  # noqa
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+================================ tests coverage ================================
+_______________ coverage: platform linux, python 3.12.14-final-0 _______________
+
+Name                      Stmts   Miss Branch BrPart  Cover   Missing
+---------------------------------------------------------------------
+src/ch1tp/__init__.py         2      0      0      0   100%
+src/ch1tp/app.py             12      0      0      0   100%
+src/ch1tp/data.py            26      0      0      0   100%
+src/ch1tp/routes.py          70      0     18      0   100%
+src/ch1tp/validation.py      34      0     24      0   100%
+---------------------------------------------------------------------
+TOTAL                       144      0     42      0   100%
+Coverage HTML written to dir coverage/html
+Coverage XML written to file coverage.xml
+Required test coverage of 80% reached. Total coverage: 100.00%
+68 passed, 1 warning in 0.43s
+
+Exit code: 0

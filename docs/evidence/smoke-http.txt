@@ -1,0 +1,39 @@
+$ /home/reddji/cour/b3/TDD&integration/tp-chapitre-1/.venv/bin/python -m uvicorn ch1tp.app:app --host 127.0.0.1 --port 18761
+
+Vérification HTTP locale réelle
+
+GET /students -> 200
+[{"id": 1, "firstName": "Ahmed", "lastName": "Benali", "email": "ahmed.benali@edtech.io", "grade": 15.5, "field": "informatique"}, {"id": 2, "firstName": "Lina", "lastName": "Moreau", "email": "lina.moreau@edtech.io", "grade": 18.0, "field": "mathématiques"}, {"id": 3, "firstName": "Youssef", "lastName": "Haddad", "email": "youssef.haddad@edtech.io", "grade": 11.25, "field": "physique"}, {"id": 4, "firstName": "Clara", "lastName": "Nguyen", "email": "clara.nguyen@edtech.io", "grade": 9.5, "field": "chimie"}, {"id": 5, "firstName": "Ahmed", "lastName": "Tazi", "email": "ahmed.tazi@edtech.io", "grade": 13.75, "field": "informatique"}]
+
+GET /students/1 -> 200
+{"id": 1, "firstName": "Ahmed", "lastName": "Benali", "email": "ahmed.benali@edtech.io", "grade": 15.5, "field": "informatique"}
+
+GET /students/999 -> 404
+{"detail": "Aucun étudiant avec l'identifiant 999"}
+
+GET /students/abc -> 400
+{"detail": "L'identifiant 'abc' n'est pas un nombre valide"}
+
+POST /students -> 201
+{"id": 6, "firstName": "Sofia", "lastName": "Lambert", "email": "sofia@example.com", "grade": 16.5, "field": "mathématiques"}
+
+POST /students -> 400
+{"detail": ["Le champ 'email' est obligatoire"]}
+
+POST /students -> 409
+{"detail": "L'email 'sofia@example.com' est déjà utilisé"}
+
+PUT /students/1 -> 200
+{"id": 1, "firstName": "Sofia", "lastName": "Lambert", "email": "update@example.com", "grade": 18.0, "field": "mathématiques"}
+
+DELETE /students/1 -> 200
+{"message": "Étudiant 1 supprimé", "student": {"id": 1, "firstName": "Sofia", "lastName": "Lambert", "email": "update@example.com", "grade": 18.0, "field": "mathématiques"}}
+
+GET /students/stats -> 200
+{"totalStudents": 5, "averageGrade": 13.8, "studentsByField": {"informatique": 1, "mathématiques": 2, "physique": 1, "chimie": 1}, "bestStudent": {"id": 2, "firstName": "Lina", "lastName": "Moreau", "email": "lina.moreau@edtech.io", "grade": 18.0, "field": "mathématiques"}}
+
+GET /students/search?q=ahmed -> 200
+[{"id": 5, "firstName": "Ahmed", "lastName": "Tazi", "email": "ahmed.tazi@edtech.io", "grade": 13.75, "field": "informatique"}]
+
+Toutes les vérifications HTTP ont réussi.
+Exit code: 0

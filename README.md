@@ -36,7 +36,7 @@ uv sync --dev
 ```
 tp-chapitre-1/
 ├── .github/workflows/ci.yml   # Pipeline d'intégration continue
-├── src/tp-chapitre-1/
+├── src/ch1tp/
 │   ├── data.py                # Données en mémoire + reset_data()
 │   ├── validation.py          # Règles de validation métier
 │   ├── routes.py              # Les 7 endpoints
@@ -177,7 +177,8 @@ curl "http://127.0.0.1:8000/students/search"           # 400, paramètre q manqu
 
 ## Tests
 
-68 tests, couverture affichée à chaque exécution :
+68 tests ; couverture locale des lignes et branches : 100 % du code applicatif
+(hors point de démarrage du serveur). La couverture est affichée à chaque exécution :
 
 ```bash
 uv run pytest
